@@ -1,21 +1,17 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
-
 <html>
 
 <head>
-<title>List Customers</title>
-
+<title>Save Customer</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-
 </head>
 
 <body>
-
 	<div class="container-fluid text-center p-3 my-3 bg-primary text-white">
 		<div>
 			<h2>CRM - Customer Relationship Manager</h2>
@@ -23,42 +19,43 @@
 	</div>
 	<br>
 
-	<div class="container-fluid ">
-
+	<div class="container-fluid">
 		<div class="row">
-
-			<!--  add our html table here -->
-
-			<table class="table table-hover table-bordered">
-				<tr class="table-success">
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email</th>
-				</tr>
-
-				<!-- loop over and print our customers -->
-				<c:forEach var="tempCustomer" items="${customers}">
-
-					<tr>
-						<td>${tempCustomer.firstName}</td>
-						<td>${tempCustomer.lastName}</td>
-						<td>${tempCustomer.email}</td>
-					</tr>
-
-				</c:forEach>
-
-			</table>
-
+			<h3>Save Customer</h3>
 		</div>
 
 		<div class="row">
+			<form:form action="saveCustomer" modelAttribute="customer"
+				method="POST">
 
-			<button type="button" class="btn btn-success"
-				onclick="window.location.href='showFormForAdd'; return false;">Add
-				Customer</button>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">First name:</label>
+					<form:input path="firstName" class="form-control" type="text" />
+				</div>
+
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Last name:</label>
+					<form:input path="lastName" class="form-control" type="text" />
+				</div>
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email:</label>
+					<form:input path="email" type="email" class="form-control"
+						id="exampleInputEmail1" aria-describedby="emailHelp" />
+				</div>
+
+				<div class="form-group">
+					<label></label> <input type="submit" value="Save"
+						class="btn btn-success" />
+				</div>
+
+			</form:form>
 
 		</div>
-
+		<div class="row">
+			<a href="${pageContext.request.contextPath}/customer/list">Back
+				to List Customer</a>
+		</div>
 	</div>
 
 	<div
@@ -82,7 +79,6 @@
 </body>
 
 </html>
-
 
 
 
