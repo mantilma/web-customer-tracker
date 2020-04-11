@@ -19,7 +19,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 			
 	@Override
-	@Transactional //questa annotazione permette al nostro codice senza scrivere nulla di iniziare e finire una transazione nel db.
 	public List<Customer> getCustomers() {
 		
 		// get the current hibernate session
