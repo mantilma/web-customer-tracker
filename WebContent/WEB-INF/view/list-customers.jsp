@@ -43,7 +43,12 @@
 					<!-- construct an "update" link with customer id -->
 					<c:url var="updateLink" value="/customer/showFormForUpdate">
 						<c:param name="customerId" value="${tempCustomer.id}" />
-					</c:url>	
+					</c:url>
+
+					<!-- construct an "delete" link with customer id -->
+					<c:url var="deleteLink" value="/customer/delete">
+						<c:param name="customerId" value="${tempCustomer.id}" />
+					</c:url>
 
 					<tr>
 						<td>${tempCustomer.firstName}</td>
@@ -52,7 +57,35 @@
 						
 						<td>
 							<!-- display the update link -->
-							<a href="${updateLink}">Update</a>
+							<a href="${updateLink}">Update</a> 
+							
+<%-- 						<a href="${deleteLink}" --%>
+<!-- 						onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a> -->
+							
+							<a href="#exampleModal${tempCustomer.id}" data-toggle="modal" data-target="#exampleModal${tempCustomer.id}">Delete</a>
+							
+							<div class="modal fade" id="exampleModal${tempCustomer.id}" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Eliminazione Customer</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">Vuoi eliminare il customer '${tempCustomer.firstName} ${tempCustomer.lastName}'</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Chiudi</button>
+											<button type="button" class="btn btn-primary" onclick="window.location.href='${deleteLink}'; return false;">Elimina</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</td>
 					</tr>
 
